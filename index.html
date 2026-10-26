@@ -3,356 +3,781 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>LUBRI | FieldTrack</title>
+<meta name="theme-color" content="#071426">
+<title>LUBRI FieldTrack | NEXORA Technologies</title>
 
 <style>
 :root {
-  --bg: #f3f6f5;
-  --navy: #122820;
-  --green: #16865b;
-  --green-light: #e5f5ec;
-  --white: #ffffff;
-  --text: #263a31;
-  --muted: #829087;
-  --border: #e0e8e3;
-  --red: #c74747;
+  --bg: #071426;
+  --panel: #10243a;
+  --panel2: #132c43;
+  --cyan: #21d4e7;
+  --green: #8be3ad;
+  --text: #edf5fc;
+  --muted: #9db1c5;
+  --border: rgba(151,183,208,.2);
+  --danger: #ff7373;
+  --gold: #f4c66b;
+  --radius: 16px;
 }
 
 * {
   box-sizing: border-box;
 }
 
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: var(--bg);
-  color: var(--text);
+html {
+  scroll-behavior: smooth;
 }
 
-button, input {
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding-left: 225px;
+  color: var(--text);
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  background:
+    radial-gradient(ellipse at 75% 5%, rgba(33,212,231,.12), transparent 35%),
+    radial-gradient(ellipse at 90% 90%, rgba(139,227,173,.07), transparent 35%),
+    linear-gradient(140deg, #071426, #0b1c30 55%, #06101e);
+}
+
+button, input, select, textarea {
   font: inherit;
 }
 
 button {
   cursor: pointer;
-  border: none;
-  border-radius: 9px;
-  padding: 12px 16px;
-  font-weight: 600;
 }
 
-input {
-  width: 100%;
-  padding: 12px;
-  margin-top: 7px;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  outline: none;
+button:disabled {
+  cursor: not-allowed;
+  opacity: .55;
 }
 
-input:focus {
-  border-color: var(--green);
+.nexora-brand {
+  position: fixed;
+  inset: 0 auto 0 0;
+  z-index: 10;
+  width: 225px;
+  padding: 30px 22px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: linear-gradient(165deg, #050d19, #0b2035 60%, #071426);
+  border-right: 1px solid rgba(33,212,231,.25);
 }
 
-.primary {
-  background: var(--green);
-  color: white;
+.nexora-brand::before {
+  content: "";
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  left: -110px;
+  top: 35%;
+  border-radius: 50%;
+  background: rgba(33,212,231,.13);
+  filter: blur(50px);
 }
 
-.secondary {
-  background: var(--green-light);
-  color: var(--green);
+.nexora-brand::after {
+  content: "";
+  position: absolute;
+  width: 160px;
+  height: 160px;
+  right: -100px;
+  bottom: 5%;
+  border-radius: 50%;
+  background: rgba(139,227,173,.1);
+  filter: blur(35px);
 }
 
-.danger {
-  background: var(--red);
-  color: white;
-}
-
-.hidden {
-  display: none !important;
-}
-
-/* LOGIN */
-
-.login-screen {
-  min-height: 100vh;
+.brand-logo {
+  width: 58px;
+  height: 58px;
   display: grid;
   place-items: center;
-  padding: 20px;
-  background:
-    radial-gradient(circle at top right, #247f5b, transparent 40%),
-    var(--navy);
-}
-
-.login-box {
-  width: 100%;
-  max-width: 420px;
-  background: white;
-  padding: 32px;
-  border-radius: 20px;
-  box-shadow: 0 20px 70px #0003;
-}
-
-.logo {
-  font-size: 27px;
+  border: 2px solid var(--cyan);
+  border-radius: 17px 5px 17px 5px;
+  color: var(--cyan);
+  font-size: 34px;
   font-weight: 900;
-  letter-spacing: 2px;
+  box-shadow: 0 0 24px rgba(33,212,231,.12);
+  background: linear-gradient(140deg, #14374a, #071426);
+}
+
+.brand-name {
+  margin-top: 16px;
+  font-size: 24px;
+  font-weight: 900;
+  letter-spacing: 3px;
+}
+
+.brand-sub {
+  margin-top: 5px;
+  color: var(--cyan);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 3px;
+}
+
+.brand-line {
+  height: 3px;
+  width: 45px;
+  margin: 28px 0;
+  border-radius: 5px;
+  background: linear-gradient(90deg, var(--cyan), var(--green));
+}
+
+.brand-tagline {
+  font-size: 25px;
+  font-weight: 900;
+  line-height: 1.35;
+}
+
+.brand-tagline span {
+  color: var(--cyan);
+}
+
+.brand-description {
+  margin-top: 15px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.oil-art {
+  position: relative;
+  width: 100px;
+  height: 115px;
+  margin: 30px auto;
+  display: grid;
+  place-items: center;
+}
+
+.oil-drop {
+  width: 54px;
+  height: 70px;
+  background: linear-gradient(145deg, #83f0ee, #168cb8 55%, #07517b);
+  border-radius: 60% 40% 55% 45% / 70% 65% 35% 30%;
+  transform: rotate(45deg);
+  box-shadow: 0 0 28px rgba(33,212,231,.25);
+  animation: floatOil 4s ease-in-out infinite;
+}
+
+.oil-drop::after {
+  content: "";
+  position: absolute;
+  top: 12px;
+  left: 13px;
+  width: 9px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.65);
+  transform: rotate(10deg);
+}
+
+.oil-ring {
+  position: absolute;
+  inset: 3px;
+  border: 1px solid rgba(33,212,231,.35);
+  border-radius: 50%;
+  animation: rotateRing 12s linear infinite;
+}
+
+.oil-ring::before,
+.oil-ring::after {
+  content: "";
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+}
+
+.oil-ring::before {
+  top: 10px;
+  left: 15px;
+}
+
+.oil-ring::after {
+  right: 8px;
+  bottom: 20px;
+}
+
+.brand-bottom {
+  margin-top: auto;
+  position: relative;
+  z-index: 1;
+  color: var(--muted);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  line-height: 2;
+}
+
+.brand-bottom strong {
   color: var(--green);
 }
 
-.logo span {
-  color: var(--navy);
+@keyframes floatOil {
+  0%,100% { transform: translateY(0) rotate(45deg); }
+  50% { transform: translateY(-8px) rotate(50deg); }
 }
 
-.tagline {
+@keyframes rotateRing {
+  to { transform: rotate(360deg); }
+}
+
+.app {
+  width: min(1440px, 100%);
+  margin: auto;
+  padding: 25px clamp(15px, 3vw, 38px) 45px;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  padding: 5px 0 22px;
+  border-bottom: 1px solid var(--border);
+}
+
+.topbar h1 {
+  margin: 0;
+  font-size: clamp(22px, 3vw, 30px);
+  letter-spacing: -.7px;
+}
+
+.topbar h1 span {
+  color: var(--cyan);
+}
+
+.eyebrow {
+  color: var(--green);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 10px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  flex-wrap: wrap;
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,.035);
+  padding: 9px 12px;
+  border-radius: 30px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  background: var(--green);
+  border-radius: 50%;
+  box-shadow: 0 0 9px rgba(139,227,173,.4);
+}
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  margin: 24px 0;
+  padding: clamp(22px, 4vw, 38px);
+  border-radius: 22px;
+  border: 1px solid rgba(33,212,231,.2);
+  background:
+    radial-gradient(circle at 90% 10%, rgba(33,212,231,.15), transparent 35%),
+    linear-gradient(125deg, #112b42, #0a192a);
+  box-shadow: 0 18px 45px rgba(0,0,0,.15);
+}
+
+.hero::after {
+  content: "L";
+  position: absolute;
+  right: 5%;
+  top: -55px;
+  font-size: 260px;
+  line-height: 1;
+  font-weight: 900;
+  color: rgba(33,212,231,.035);
+  pointer-events: none;
+}
+
+.hero h2 {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 10px;
+  font-size: clamp(25px, 4vw, 38px);
+}
+
+.hero p {
+  position: relative;
+  z-index: 1;
+  max-width: 660px;
+  color: var(--muted);
+  line-height: 1.8;
+  margin: 0;
+  font-size: 14px;
+}
+
+.hero strong {
+  color: var(--cyan);
+}
+
+.hero-meta {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.chip {
+  display: inline-block;
+  border-radius: 8px;
+  padding: 7px 10px;
+  color: var(--green);
+  background: rgba(139,227,173,.08);
+  border: 1px solid rgba(139,227,173,.15);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.panel {
+  padding: 23px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: linear-gradient(145deg, rgba(18,41,63,.95), rgba(9,25,42,.97));
+  box-shadow: 0 12px 30px rgba(0,0,0,.12);
+  margin-bottom: 20px;
+  min-width: 0;
+}
+
+.panel h2,
+.panel h3 {
+  margin-top: 0;
+}
+
+.panel h2 {
+  font-size: 20px;
+}
+
+.panel h3 {
+  font-size: 15px;
+}
+
+.muted {
   color: var(--muted);
   font-size: 12px;
-  margin-top: 7px;
-  letter-spacing: 2px;
+  line-height: 1.7;
 }
 
-.tabs {
-  display: flex;
-  gap: 8px;
-  margin: 25px 0;
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 20px;
 }
 
-.tabs button {
-  flex: 1;
-  background: #edf2ef;
-  color: var(--text);
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0,1fr));
+  gap: 14px;
+  margin-bottom: 20px;
 }
 
-.tabs button.active {
-  background: var(--green);
-  color: white;
+.stat {
+  min-width: 0;
+  padding: 19px;
+  border-radius: 15px;
+  border: 1px solid var(--border);
+  background: linear-gradient(140deg, rgba(20,47,71,.95), rgba(9,24,40,.95));
+}
+
+.stat-label {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.stat-value {
+  margin-top: 10px;
+  font-size: clamp(22px, 3vw, 30px);
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+.stat-value.cyan { color: var(--cyan); }
+.stat-value.green { color: var(--green); }
+.stat-value.gold { color: var(--gold); }
+
+.form-group {
+  margin-bottom: 15px;
 }
 
 label {
   display: block;
-  margin-bottom: 16px;
-  font-size: 13px;
+  margin-bottom: 7px;
+  color: #c5d5e4;
+  font-size: 12px;
   font-weight: 700;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  min-height: 44px;
+  border-radius: 10px;
+  padding: 11px 12px;
+  color: var(--text);
+  background: #08182a;
+  border: 1px solid rgba(151,183,208,.28);
+  outline: none;
+  transition: border-color .2s, box-shadow .2s;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--cyan);
+  box-shadow: 0 0 0 3px rgba(33,212,231,.1);
+}
+
+input::placeholder {
+  color: #70859b;
+}
+
+button {
+  border: 0;
+  border-radius: 10px;
+  padding: 11px 15px;
+  font-weight: 750;
+  font-size: 12px;
+  transition: transform .2s, filter .2s, box-shadow .2s;
+}
+
+button:hover:not(:disabled) {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+.btn-primary {
+  color: #041321;
+  background: linear-gradient(110deg, var(--cyan), #76eee0);
+  box-shadow: 0 5px 16px rgba(33,212,231,.12);
+}
+
+.btn-green {
+  color: #071b13;
+  background: linear-gradient(110deg, #8be3ad, #b4f0c8);
+}
+
+.btn-secondary {
+  color: var(--text);
+  border: 1px solid var(--border);
+  background: #152b40;
+}
+
+.btn-danger {
+  color: #fff;
+  background: #8d303c;
+}
+
+.btn-small {
+  padding: 8px 10px;
+  font-size: 11px;
 }
 
 .full {
   width: 100%;
 }
 
-.message {
-  margin-top: 14px;
-  font-size: 13px;
-  line-height: 1.5;
-  overflow-wrap: anywhere;
-}
-
-/* APP */
-
-header {
-  background: var(--navy);
-  color: white;
-  padding: 18px 25px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 15px;
-}
-
-header .logo {
-  color: #65d7a0;
-}
-
-header .logo span {
-  color: white;
-}
-
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 13px;
-}
-
-.header-right button {
-  background: #ffffff1a;
-  color: white;
-}
-
-.layout {
-  display: flex;
-  min-height: calc(100vh - 75px);
-}
-
-.sidebar {
-  width: 220px;
-  padding: 20px 12px;
-  background: white;
-  border-right: 1px solid var(--border);
-  flex-shrink: 0;
-}
-
-.nav-button {
-  width: 100%;
-  display: block;
-  text-align: left;
-  background: transparent;
-  color: #5b6c61;
-  margin-bottom: 7px;
-}
-
-.nav-button.active,
-.nav-button:hover {
-  background: var(--green-light);
-  color: var(--green);
-}
-
-main {
-  flex: 1;
-  padding: 28px;
-  min-width: 0;
-}
-
-.page-heading {
-  margin: 0 0 8px;
-  font-size: 26px;
-}
-
-.muted {
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.6;
-}
-
-.card {
-  background: white;
-  border: 1px solid var(--border);
-  border-radius: 15px;
-  padding: 22px;
-  margin-bottom: 20px;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
-  margin: 24px 0;
-}
-
-.stat-label {
-  color: var(--muted);
-  font-size: 13px;
-}
-
-.stat-number {
-  font-size: 30px;
-  font-weight: 800;
-  margin-top: 12px;
-  color: var(--navy);
-}
-
-.form-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0 16px;
-}
-
-.actions {
+.button-row {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
 }
 
-.status {
-  display: inline-block;
-  padding: 6px 10px;
-  background: var(--green-light);
-  color: var(--green);
-  border-radius: 30px;
-  font-size: 12px;
-  font-weight: 700;
+.tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 22px;
 }
 
-.status.off {
-  background: #f0f1f1;
-  color: #69736d;
+.tab {
+  flex: 1;
+  background: #0a1b2d;
+  color: var(--muted);
+  border: 1px solid var(--border);
+}
+
+.tab.active {
+  color: var(--cyan);
+  background: rgba(33,212,231,.1);
+  border-color: rgba(33,212,231,.45);
+}
+
+.notice {
+  padding: 12px 14px;
+  margin: 12px 0;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: rgba(255,255,255,.025);
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+
+.notice.error {
+  color: #ffb4b4;
+  border-color: rgba(255,115,115,.3);
+  background: rgba(255,115,115,.07);
+}
+
+.notice.success {
+  color: var(--green);
+  border-color: rgba(139,227,173,.3);
+  background: rgba(139,227,173,.06);
+}
+
+.hidden {
+  display: none !important;
+}
+
+.section-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.section-title h2,
+.section-title h3 {
+  margin: 0;
 }
 
 .table-wrap {
+  width: 100%;
   overflow-x: auto;
+  border-radius: 12px;
+  border: 1px solid var(--border);
 }
 
 table {
   width: 100%;
-  min-width: 650px;
   border-collapse: collapse;
+  font-size: 12px;
+  min-width: 600px;
 }
 
 th, td {
   text-align: left;
-  padding: 13px 10px;
+  padding: 13px 12px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  line-height: 1.6;
+}
+
+th {
+  color: var(--cyan);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background: rgba(33,212,231,.055);
+  white-space: nowrap;
+}
+
+td {
+  color: #d5e2ed;
+}
+
+tbody tr:hover {
+  background: rgba(255,255,255,.025);
+}
+
+.badge {
+  display: inline-block;
+  padding: 5px 8px;
+  border-radius: 7px;
+  font-size: 10px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.badge.green {
+  color: var(--green);
+  background: rgba(139,227,173,.1);
+}
+
+.badge.gold {
+  color: var(--gold);
+  background: rgba(244,198,107,.1);
+}
+
+.badge.red {
+  color: #ffaaaa;
+  background: rgba(255,115,115,.1);
+}
+
+.badge.blue {
+  color: var(--cyan);
+  background: rgba(33,212,231,.1);
+}
+
+.profile-line {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 12px 0;
   border-bottom: 1px solid var(--border);
   font-size: 13px;
 }
 
-th {
+.profile-line span:first-child {
   color: var(--muted);
-  background: #f8faf9;
 }
 
-footer {
-  text-align: center;
-  color: var(--muted);
-  font-size: 12px;
+.profile-line span:last-child {
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+.empty {
   padding: 25px;
+  color: var(--muted);
+  text-align: center;
+  font-size: 12px;
 }
 
-@media (max-width: 750px) {
-  header {
-    padding: 15px;
+.footer {
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 10px;
+  text-align: center;
+  line-height: 2;
+}
+
+.footer strong {
+  color: var(--cyan);
+  letter-spacing: 1px;
+}
+
+.loading {
+  opacity: .7;
+  pointer-events: none;
+}
+
+@media (max-width: 850px) {
+  body {
+    padding-left: 0;
+    padding-bottom: 70px;
   }
 
-  .layout {
-    display: block;
-  }
-
-  .sidebar {
+  .nexora-brand {
+    position: relative;
     width: 100%;
-    display: flex;
-    overflow-x: auto;
-    padding: 9px;
+    height: auto;
+    min-height: 0;
+    padding: 13px 18px;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    border-right: 0;
+    border-bottom: 1px solid rgba(33,212,231,.25);
   }
 
-  .nav-button {
-    width: auto;
-    white-space: nowrap;
-    margin: 0 4px;
+  .nexora-brand::before,
+  .nexora-brand::after,
+  .brand-line,
+  .brand-tagline,
+  .brand-description,
+  .oil-art,
+  .brand-bottom {
+    display: none;
   }
 
-  main {
-    padding: 16px;
+  .brand-logo {
+    width: 40px;
+    height: 40px;
+    flex: 0 0 40px;
+    border-radius: 12px 4px 12px 4px;
+    font-size: 25px;
+    margin: 0;
+  }
+
+  .brand-name {
+    margin: 0;
+    font-size: 18px;
+    letter-spacing: 2px;
+  }
+
+  .brand-sub {
+    margin-top: 3px;
+    font-size: 8px;
+    letter-spacing: 2px;
+  }
+
+  .app {
+    padding: 16px 13px 30px;
+  }
+
+  .topbar {
+    padding-bottom: 16px;
+  }
+
+  .hero {
+    margin: 16px 0;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, minmax(0,1fr));
   }
 
   .grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 10px;
-  }
-
-  .form-grid {
     grid-template-columns: 1fr;
+    gap: 14px;
   }
 
-  .card {
-    padding: 16px;
+  .panel {
+    padding: 17px;
+  }
+}
+
+@media (max-width: 420px) {
+  .header-right {
+    width: 100%;
   }
 
-  .login-box {
-    padding: 25px;
+  .status-pill {
+    font-size: 10px;
   }
 
-  .page-heading {
-    font-size: 22px;
+  .stat {
+    padding: 14px;
+  }
+
+  .button-row > button {
+    flex: 1;
+  }
+
+  .hero h2 {
+    font-size: 25px;
   }
 }
 </style>
@@ -360,886 +785,1238 @@ footer {
 
 <body>
 
-<!-- LOGIN SCREEN -->
-
-<section id="loginScreen" class="login-screen">
-  <div class="login-box">
-
-    <div class="logo">LUBRI<span>.</span></div>
-    <div class="tagline">FIELDTRACK · EMPLOYEE MONITORING</div>
-
-    <div class="tabs">
-      <button id="employeeTab" class="active"
-        onclick="selectMode('employee')">Employee</button>
-
-      <button id="adminTab"
-        onclick="selectMode('admin')">Admin</button>
-    </div>
-
-    <form id="loginForm">
-      <div id="registerFields" class="hidden">
-
-        <label>Full Name
-          <input id="registerName" maxlength="100">
-        </label>
-
-        <label>Phone Number
-          <input id="registerPhone" type="tel" maxlength="20">
-        </label>
-
-        <label>Employee ID
-          <input id="registerId" maxlength="40">
-        </label>
-
-      </div>
-
-      <label>Username
-        <input id="username" autocomplete="username" required>
-      </label>
-
-      <label>Password
-        <input id="password" type="password"
-          autocomplete="current-password" required>
-      </label>
-
-      <button id="loginButton" class="primary full" type="submit">
-        Employee Login
-      </button>
-
-      <button id="registerButton" class="secondary full hidden"
-        type="button" onclick="registerEmployee()"
-        style="margin-top:10px">
-        Create Employee Account
-      </button>
-
-      <button id="showRegisterButton" class="secondary full"
-        type="button" onclick="toggleRegister()"
-        style="margin-top:10px">
-        New Employee? Register
-      </button>
-
-      <div id="loginMessage" class="message"></div>
-    </form>
-
-    <p class="muted">
-      Secure field attendance workspace.
-    </p>
-
+<aside class="nexora-brand">
+  <div class="brand-logo">N</div>
+  <div>
+    <div class="brand-name">NEXORA</div>
+    <div class="brand-sub">TECHNOLOGIES</div>
   </div>
-</section>
 
-<!-- MAIN APPLICATION -->
+  <div class="brand-line"></div>
 
-<div id="application" class="hidden">
+  <div class="brand-tagline">
+    <span>BUILD</span><br>
+    WHAT'S<br>
+    NEXT.
+  </div>
 
-  <header>
+  <div class="brand-description">
+    Digital systems.<br>
+    Industrial intelligence.<br>
+    Smarter field operations.
+  </div>
+
+  <div class="oil-art">
+    <div class="oil-ring"></div>
+    <div class="oil-drop"></div>
+  </div>
+
+  <div class="brand-bottom">
+    ENGINEERED FOR PROGRESS<br>
+    <strong>POWERED BY NEXORA</strong>
+  </div>
+</aside>
+
+<main class="app">
+
+  <header class="topbar">
     <div>
-      <div class="logo">LUBRI<span>.</span></div>
-      <div style="font-size:10px;letter-spacing:2px;margin-top:5px">
-        FIELDTRACK
-      </div>
+      <div class="eyebrow">Industrial Field Operations</div>
+      <h1>LUBRI <span>FieldTrack</span></h1>
     </div>
 
     <div class="header-right">
-      <span id="headerUser"></span>
-      <button onclick="logout()">Logout</button>
+      <div class="status-pill">
+        <span class="status-dot"></span>
+        API Connected
+      </div>
+      <button id="logoutBtn" class="btn-secondary hidden" onclick="logout()">
+        Sign Out
+      </button>
     </div>
   </header>
 
-  <div class="layout">
+  <section class="hero">
+    <div class="eyebrow">Smart Lubrication Management</div>
+    <h2>Every Visit. Every Drop. <span style="color:var(--cyan)">Tracked.</span></h2>
+    <p>
+      A smarter way to manage lubrication field visits, employee attendance,
+      customer locations and visit history, built for modern industrial operations.
+    </p>
+    <div class="hero-meta">
+      <span class="chip">FIELD ATTENDANCE</span>
+      <span class="chip">GPS CHECK-IN</span>
+      <span class="chip">VISIT MANAGEMENT</span>
+      <span class="chip">NEXORA TECHNOLOGIES</span>
+    </div>
+  </section>
 
-    <aside id="navigation" class="sidebar"></aside>
+  <div id="globalMessage" class="notice hidden" role="status"></div>
 
-    <main>
-      <h1 id="pageTitle" class="page-heading">Dashboard</h1>
-      <div id="pageDate" class="muted"></div>
+  <!-- AUTHENTICATION -->
+  <section id="authSection" class="grid">
 
-      <!-- EMPLOYEE DASHBOARD -->
+    <div class="panel">
+      <div class="tabs">
+        <button id="loginTab" class="tab active" onclick="showAuthTab('login')">
+          Sign In
+        </button>
+        <button id="registerTab" class="tab" onclick="showAuthTab('register')">
+          Employee Registration
+        </button>
+      </div>
 
-      <section id="employeeDashboard" class="hidden">
+      <form id="loginForm">
+        <h2>Welcome Back</h2>
+        <p class="muted">Sign in to your field operations account.</p>
 
-        <div class="grid">
-
-          <div class="card">
-            <div class="stat-label">Today's Visits</div>
-            <div class="stat-number" id="myVisits">0</div>
-          </div>
-
-          <div class="card">
-            <div class="stat-label">Current Status</div>
-            <div id="myStatus" style="margin-top:12px">
-              <span class="status off">Not checked in</span>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="stat-label">GPS Status</div>
-            <div id="myGPSStatus" style="margin-top:12px">
-              Not captured
-            </div>
-          </div>
-
+        <div class="form-group">
+          <label for="loginUsername">Username</label>
+          <input id="loginUsername" autocomplete="username"
+                 required minlength="3" maxlength="40"
+                 placeholder="Enter username">
         </div>
 
-        <div class="card">
-          <h3>Record a Company Visit</h3>
-
-          <p class="muted">
-            Ovvoru pudhu company visit-kum company name enter panni
-            GPS check-in pannunga. Work mudinjadhum check-out pannunga.
-          </p>
-
-          <label>Company Name
-            <input id="companyName" maxlength="150"
-              placeholder="Enter customer company name">
-          </label>
-
-          <div class="actions">
-            <button id="checkInButton" class="primary"
-              onclick="checkIn()">📍 Check In</button>
-
-            <button id="checkOutButton" class="danger hidden"
-              onclick="checkOut()">Check Out</button>
-          </div>
-
-          <div id="attendanceMessage" class="message"></div>
+        <div class="form-group">
+          <label for="loginPassword">Password</label>
+          <input id="loginPassword" type="password"
+                 autocomplete="current-password"
+                 required placeholder="Enter password">
         </div>
 
-        <div class="card">
-          <h3>Today's Visits</h3>
-          <div id="myHistory"></div>
+        <button id="loginSubmit" class="btn-primary full" type="submit">
+          Sign In Securely
+        </button>
+
+        <p class="muted" style="margin-top:14px">
+          Employees and authorized administrators use this sign-in form.
+        </p>
+      </form>
+
+      <form id="registerForm" class="hidden">
+        <h2>Employee Registration</h2>
+        <p class="muted">Create your employee account.</p>
+
+        <div class="form-group">
+          <label for="regName">Full Name</label>
+          <input id="regName" required maxlength="100"
+                 autocomplete="name" placeholder="Employee name">
         </div>
 
-      </section>
-
-      <!-- EMPLOYEE PROFILE -->
-
-      <section id="profilePage" class="hidden">
-        <div class="card">
-          <h3>My Profile</h3>
-
-          <form id="profileForm">
-            <div class="form-grid">
-
-              <label>Full Name
-                <input id="profileName" required maxlength="100">
-              </label>
-
-              <label>Phone Number
-                <input id="profilePhone" required maxlength="20">
-              </label>
-
-              <label>Employee ID
-                <input id="profileId" disabled>
-              </label>
-
-              <label>Username
-                <input id="profileUsername" disabled>
-              </label>
-
-            </div>
-
-            <button class="primary" type="submit">
-              Update Profile
-            </button>
-            <div id="profileMessage" class="message"></div>
-          </form>
-        </div>
-      </section>
-
-      <!-- ADMIN DASHBOARD -->
-
-      <section id="adminDashboard" class="hidden">
-
-        <div class="grid">
-
-          <div class="card">
-            <div class="stat-label">Total Employees</div>
-            <div class="stat-number" id="adminTotal">0</div>
-          </div>
-
-          <div class="card">
-            <div class="stat-label">Present Now</div>
-            <div class="stat-number" id="adminPresent">0</div>
-          </div>
-
-          <div class="card">
-            <div class="stat-label">Today's Visits</div>
-            <div class="stat-number" id="adminVisits">0</div>
-          </div>
-
+        <div class="form-group">
+          <label for="regPhone">Phone Number</label>
+          <input id="regPhone" required maxlength="20"
+                 autocomplete="tel" placeholder="Contact number">
         </div>
 
-        <div class="card">
-          <div class="actions"
-            style="justify-content:space-between;align-items:center">
-
-            <h3>Employee Monitoring</h3>
-
-            <button class="secondary" onclick="renderAdmin()">
-              Refresh
-            </button>
-
-          </div>
-
-          <label>Search Employee / Company
-            <input id="adminSearch"
-              placeholder="Search..."
-              oninput="renderAdmin()">
-          </label>
-
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Employee</th>
-                  <th>Company</th>
-                  <th>Check-in</th>
-                  <th>Check-out</th>
-                  <th>Location</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody id="adminTable"></tbody>
-            </table>
-          </div>
+        <div class="form-group">
+          <label for="regEmployeeId">Employee ID</label>
+          <input id="regEmployeeId" required minlength="2" maxlength="40"
+                 placeholder="Company employee ID">
         </div>
 
-        <div class="card">
-          <h3>Employee Accounts</h3>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Employee ID</th>
-                  <th>Name</th>
-                  <th>Phone</th>
-                  <th>Username</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody id="adminEmployees"></tbody>
-            </table>
-          </div>
+        <div class="form-group">
+          <label for="regUsername">Create Username</label>
+          <input id="regUsername" required minlength="3" maxlength="40"
+                 autocomplete="username"
+                 pattern="[A-Za-z0-9_.-]+"
+                 placeholder="Choose a username">
         </div>
 
-      </section>
+        <div class="form-group">
+          <label for="regPassword">Create Password</label>
+          <input id="regPassword" type="password" required minlength="10"
+                 maxlength="128" autocomplete="new-password"
+                 placeholder="At least 10 characters">
+        </div>
 
-      <footer>
-        LUBRI FieldTrack · Employee Attendance Monitoring
-      </footer>
-    </main>
-  </div>
-</div>
+        <button id="registerSubmit" class="btn-green full" type="submit">
+          Create Employee Account
+        </button>
+
+        <div class="notice">
+          Use a strong, unique password. Follow your company's employee
+          onboarding policy before using this account for official visits.
+        </div>
+      </form>
+    </div>
+
+    <div class="panel">
+      <div class="eyebrow">Designed for Industry</div>
+      <h2>Lubrication Field Intelligence</h2>
+      <p class="muted">
+        Manage daily field activities from one responsive dashboard.
+        The system records visit times and, when location permission is
+        granted, GPS coordinates.
+      </p>
+
+      <div class="profile-line">
+        <span>Attendance</span>
+        <span class="badge blue">Live API</span>
+      </div>
+      <div class="profile-line">
+        <span>Visit history</span>
+        <span class="badge green">Database-backed</span>
+      </div>
+      <div class="profile-line">
+        <span>Location</span>
+        <span class="badge gold">Browser GPS</span>
+      </div>
+      <div class="profile-line">
+        <span>Platform</span>
+        <span>Mobile + Desktop</span>
+      </div>
+
+      <div class="notice">
+        <strong style="color:var(--cyan)">NEXORA TECHNOLOGIES</strong><br>
+        Build What’s Next. Digital solutions for real-world operations.
+      </div>
+    </div>
+  </section>
+
+  <!-- EMPLOYEE DASHBOARD -->
+  <section id="employeeSection" class="hidden">
+
+    <div class="section-title">
+      <div>
+        <div class="eyebrow">Employee Workspace</div>
+        <h2 id="employeeWelcome">Welcome</h2>
+        <div class="muted">Manage your daily customer visits.</div>
+      </div>
+      <span id="employeeStatus" class="badge gold">Not Checked In</span>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat">
+        <div class="stat-label">VISITS TODAY</div>
+        <div id="statVisits" class="stat-value cyan">0</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">COMPLETED VISITS</div>
+        <div id="statCompleted" class="stat-value green">0</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">CURRENT ACTIVITY</div>
+        <div id="statActivity" class="stat-value gold" style="font-size:18px">Ready</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">LOCATION</div>
+        <div id="statLocation" class="stat-value" style="font-size:18px">Not checked</div>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="panel">
+        <div class="eyebrow">Field Visit</div>
+        <h2>Customer Check-In</h2>
+        <p class="muted">
+          Enter the customer or company name. Location permission is needed
+          to record GPS coordinates.
+        </p>
+
+        <form id="checkInForm">
+          <div class="form-group">
+            <label for="companyName">Customer / Company Name</label>
+            <input id="companyName" required maxlength="150"
+                   placeholder="Enter customer company name">
+          </div>
+
+          <div class="notice">
+            GPS is requested only when you press the check-in or check-out
+            button. Allow location access in your browser when prompted.
+          </div>
+
+          <button id="checkInBtn" class="btn-primary full" type="submit">
+            Get GPS & Check In
+          </button>
+        </form>
+
+        <div style="height:12px"></div>
+
+        <button id="checkOutBtn" class="btn-green full hidden"
+                onclick="checkOutVisit()">
+          Get GPS & Check Out
+        </button>
+
+        <div id="visitMessage" class="notice hidden"></div>
+      </div>
+
+      <div class="panel">
+        <div class="eyebrow">My Account</div>
+        <h2>Employee Profile</h2>
+
+        <div class="profile-line">
+          <span>Employee Name</span>
+          <span id="profileName">-</span>
+        </div>
+        <div class="profile-line">
+          <span>Employee ID</span>
+          <span id="profileEmployeeId">-</span>
+        </div>
+        <div class="profile-line">
+          <span>Username</span>
+          <span id="profileUsername">-</span>
+        </div>
+
+        <form id="profileForm" style="margin-top:18px">
+          <div class="form-group">
+            <label for="profileEditName">Update Name</label>
+            <input id="profileEditName" maxlength="100" required>
+          </div>
+          <div class="form-group">
+            <label for="profileEditPhone">Update Phone</label>
+            <input id="profileEditPhone" maxlength="20" required>
+          </div>
+          <button class="btn-secondary full" type="submit">
+            Save Profile Changes
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="section-title">
+        <div>
+          <div class="eyebrow">Activity Log</div>
+          <h2>My Visit History</h2>
+        </div>
+        <button class="btn-secondary" onclick="loadMyVisits()">Refresh</button>
+      </div>
+
+      <div class="form-group" style="max-width:250px">
+        <label for="employeeVisitDate">Filter by Date</label>
+        <input id="employeeVisitDate" type="date">
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Customer</th>
+              <th>Check In</th>
+              <th>Check Out</th>
+              <th>Status</th>
+              <th>GPS</th>
+            </tr>
+          </thead>
+          <tbody id="myVisitsBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ADMIN DASHBOARD -->
+  <section id="adminSection" class="hidden">
+
+    <div class="section-title">
+      <div>
+        <div class="eyebrow">Management Console</div>
+        <h2>Admin Dashboard</h2>
+        <p class="muted">Monitor employee accounts and field visits.</p>
+      </div>
+      <button class="btn-primary" onclick="refreshAdmin()">Refresh Dashboard</button>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat">
+        <div class="stat-label">TOTAL EMPLOYEES</div>
+        <div id="adminEmployeeCount" class="stat-value cyan">0</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">VISITS FOUND</div>
+        <div id="adminVisitCount" class="stat-value green">0</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">ACTIVE VISITS</div>
+        <div id="adminActiveCount" class="stat-value gold">0</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">COMPLETED VISITS</div>
+        <div id="adminCompletedCount" class="stat-value">0</div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="section-title">
+        <div>
+          <div class="eyebrow">Field Monitoring</div>
+          <h2>Visit Records</h2>
+        </div>
+        <button class="btn-secondary" onclick="exportAdminVisits()">
+          Export CSV
+        </button>
+      </div>
+
+      <div class="grid" style="margin-bottom:15px">
+        <div class="form-group">
+          <label for="adminVisitDate">Visit Date</label>
+          <input id="adminVisitDate" type="date">
+        </div>
+        <div class="form-group">
+          <label for="adminVisitSearch">Search Records</label>
+          <input id="adminVisitSearch" placeholder="Employee or company">
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Employee</th>
+              <th>Employee ID</th>
+              <th>Company</th>
+              <th>Date</th>
+              <th>Check In</th>
+              <th>Check Out</th>
+              <th>Status</th>
+              <th>GPS</th>
+            </tr>
+          </thead>
+          <tbody id="adminVisitsBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="section-title">
+        <div>
+          <div class="eyebrow">Team Management</div>
+          <h2>Employee Accounts</h2>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="employeeSearch">Search Employees</label>
+        <input id="employeeSearch" placeholder="Search name, ID or username">
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Employee ID</th>
+              <th>Username</th>
+              <th>Phone</th>
+              <th>Current Company</th>
+              <th>Check In</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="adminEmployeesBody"></tbody>
+        </table>
+      </div>
+
+      <div class="notice">
+        Editing updates an employee's name and phone number. Deleting an
+        employee is permanent and may remove associated records depending
+        on the database's foreign-key rules.
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <strong>NEXORA TECHNOLOGIES</strong><br>
+    LUBRI FieldTrack · Industrial Field Operations Platform<br>
+    Build What’s Next.
+  </footer>
+</main>
 
 <script>
-/*
-  FRONTEND PROTOTYPE ONLY.
+"use strict";
 
-  This version stores demo data in this browser.
-  It does not yet connect to a shared database or secure backend.
+/* ==========================================
+   LUBRI FIELDTRACK
+   NEXORA TECHNOLOGIES
+   Backend API integration
+========================================== */
 
-  Production requirements:
-  - Secure server-side authentication
-  - Password hashing
-  - Shared database
-  - Server-side role permissions
-  - Server-side employee deletion
-*/
+const API_BASE = "https://lubri-fieldtrack.toollubri.workers.dev";
+const TOKEN_KEY = "lubri_fieldtrack_session";
+const USER_KEY = "lubri_fieldtrack_user";
 
-const STORAGE_KEY = "lubri_fieldtrack_prototype";
+let sessionToken = localStorage.getItem(TOKEN_KEY) || "";
+let currentUser = readStoredUser();
+let myVisits = [];
+let adminVisits = [];
+let adminEmployees = [];
+let activeVisit = null;
 
-let mode = "employee";
-let currentUser = null;
-let isRegistering = false;
-
-function readData() {
+function readStoredUser() {
   try {
-    const value = localStorage.getItem(STORAGE_KEY);
-    if (value) return JSON.parse(value);
-  } catch (error) {
-    console.error(error);
+    return JSON.parse(localStorage.getItem(USER_KEY) || "null");
+  } catch {
+    return null;
   }
-
-  const initial = {
-    employees: [],
-    visits: []
-  };
-
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(initial));
-  return initial;
 }
 
-let data = readData();
+function saveSession(token, user) {
+  sessionToken = token || "";
+  currentUser = user || null;
 
-function saveData() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-  renderApp();
+  if (sessionToken) localStorage.setItem(TOKEN_KEY, sessionToken);
+  else localStorage.removeItem(TOKEN_KEY);
+
+  if (currentUser) localStorage.setItem(USER_KEY, JSON.stringify(currentUser));
+  else localStorage.removeItem(USER_KEY);
 }
 
-function id(prefix) {
-  return prefix + "-" + Date.now() + "-" +
-    Math.random().toString(36).slice(2, 7);
-}
-
-function escapeHTML(value) {
-  return String(value ?? "").replace(/[&<>"']/g, char => ({
+function escapeHtml(value) {
+  return String(value ?? "").replace(/[&<>"']/g, ch => ({
     "&": "&amp;",
     "<": "&lt;",
     ">": "&gt;",
     '"': "&quot;",
     "'": "&#39;"
-  })[char]);
+  })[ch]);
 }
 
-function localDay(date = new Date()) {
-  return [
-    date.getFullYear(),
-    String(date.getMonth() + 1).padStart(2, "0"),
-    String(date.getDate()).padStart(2, "0")
-  ].join("-");
+function localDate() {
+  const d = new Date();
+  const offset = d.getTimezoneOffset();
+  return new Date(d.getTime() - offset * 60000).toISOString().slice(0, 10);
 }
 
-function displayTime(value) {
-  return value
-    ? new Date(value).toLocaleString()
-    : "—";
+function formatDate(value) {
+  if (!value) return "-";
+  const d = new Date(value);
+  return Number.isNaN(d.getTime()) ? escapeHtml(value) : d.toLocaleDateString();
 }
 
-function selectMode(value) {
-  mode = value;
-  isRegistering = false;
-
-  document.getElementById("employeeTab")
-    .classList.toggle("active", value === "employee");
-
-  document.getElementById("adminTab")
-    .classList.toggle("active", value === "admin");
-
-  document.getElementById("registerFields")
-    .classList.add("hidden");
-
-  document.getElementById("registerButton")
-    .classList.add("hidden");
-
-  document.getElementById("showRegisterButton")
-    .classList.toggle("hidden", value === "admin");
-
-  document.getElementById("loginButton").textContent =
-    value === "admin" ? "Admin Login" : "Employee Login";
-
-  document.getElementById("loginMessage").textContent = "";
+function formatTime(value) {
+  if (!value) return "-";
+  const d = new Date(value);
+  return Number.isNaN(d.getTime())
+    ? escapeHtml(value)
+    : d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
 }
 
-function toggleRegister() {
-  isRegistering = true;
+function showMessage(message, type = "", target = "globalMessage") {
+  const el = document.getElementById(target);
+  if (!el) return;
 
-  document.getElementById("registerFields")
-    .classList.remove("hidden");
-
-  document.getElementById("registerButton")
-    .classList.remove("hidden");
-
-  document.getElementById("showRegisterButton")
-    .classList.add("hidden");
-
-  document.getElementById("loginButton")
-    .classList.add("hidden");
+  el.textContent = message;
+  el.className = "notice" + (type ? " " + type : "");
+  el.classList.remove("hidden");
 }
 
-function registerEmployee() {
-  const name = document.getElementById("registerName").value.trim();
-  const phone = document.getElementById("registerPhone").value.trim();
-  const employeeId = document.getElementById("registerId").value.trim();
-  const username = document.getElementById("username").value.trim();
-  const password = document.getElementById("password").value;
-
-  if (!name || !phone || !employeeId || !username || !password) {
-    alert("Please complete all registration fields.");
-    return;
-  }
-
-  if (password.length < 8) {
-    alert("Use a password with at least 8 characters.");
-    return;
-  }
-
-  const duplicate = data.employees.some(employee =>
-    employee.username.toLowerCase() === username.toLowerCase() ||
-    employee.employeeId.toLowerCase() === employeeId.toLowerCase()
-  );
-
-  if (duplicate) {
-    alert("Username or employee ID already exists.");
-    return;
-  }
-
-  /*
-    Demo only: never store plain-text passwords in production.
-    The production backend must hash passwords server-side.
-  */
-
-  data.employees.push({
-    id: id("employee"),
-    employeeId,
-    name,
-    phone,
-    username,
-    demoPassword: password,
-    createdAt: new Date().toISOString(),
-    active: true
-  });
-
-  saveData();
-
-  alert("Demo registration completed. You can now log in.");
-
-  document.getElementById("loginForm").reset();
-  selectMode("employee");
+function hideMessage(target = "globalMessage") {
+  const el = document.getElementById(target);
+  if (el) el.classList.add("hidden");
 }
 
-document.getElementById("loginForm").addEventListener("submit", event => {
-  event.preventDefault();
-
-  const username = document.getElementById("username").value.trim();
-  const password = document.getElementById("password").value;
-
-  if (mode === "admin") {
-    /*
-      Prototype credentials only.
-      Replace with secure server-side authentication before deployment.
-    */
-    if (username === "admin" && password === "ChangeThisAdminPassword") {
-      currentUser = {
-        id: "admin",
-        name: "Administrator",
-        role: "admin"
-      };
-
-      openApp();
-    } else {
-      document.getElementById("loginMessage").textContent =
-        "Invalid admin credentials.";
-    }
-
-    return;
-  }
-
-  const employee = data.employees.find(item =>
-    item.username.toLowerCase() === username.toLowerCase() &&
-    item.demoPassword === password &&
-    item.active
-  );
-
-  if (!employee) {
-    document.getElementById("loginMessage").textContent =
-      "Invalid username or password.";
-    return;
-  }
-
-  currentUser = {
-    ...employee,
-    role: "employee"
+async function api(path, options = {}) {
+  const headers = {
+    "Content-Type": "application/json",
+    ...(options.headers || {})
   };
 
-  openApp();
-});
+  if (sessionToken) {
+    headers.Authorization = "Bearer " + sessionToken;
+  }
 
-function openApp() {
-  document.getElementById("loginScreen").classList.add("hidden");
-  document.getElementById("application").classList.remove("hidden");
+  let response;
 
-  document.getElementById("headerUser").textContent =
-    currentUser.name + " · " +
-    (currentUser.role === "admin" ? "Admin" : "Employee");
-
-  buildNavigation();
-  renderApp();
-  showPage(currentUser.role === "admin" ? "admin" : "employee");
-}
-
-function logout() {
-  currentUser = null;
-
-  document.getElementById("application").classList.add("hidden");
-  document.getElementById("loginScreen").classList.remove("hidden");
-  document.getElementById("loginForm").reset();
-
-  selectMode("employee");
-}
-
-function buildNavigation() {
-  const nav = currentUser.role === "admin"
-    ? [
-        ["admin", "Monitoring Dashboard"]
-      ]
-    : [
-        ["employee", "My Attendance"],
-        ["profile", "My Profile"]
-      ];
-
-  document.getElementById("navigation").innerHTML =
-    nav.map(([page, title]) => `
-      <button id="nav-${page}" class="nav-button"
-        onclick="showPage('${page}')">${title}</button>
-    `).join("");
-}
-
-function showPage(page) {
-  const pages = ["employee", "profile", "admin"];
-
-  pages.forEach(name => {
-    const element = document.getElementById(
-      name === "admin" ? "adminDashboard" :
-      name === "profile" ? "profilePage" :
-      "employeeDashboard"
+  try {
+    response = await fetch(API_BASE + path, {
+      ...options,
+      headers
+    });
+  } catch {
+    throw new Error(
+      "Cannot connect to the server. Check your internet connection and try again."
     );
+  }
 
-    element.classList.toggle("hidden", name !== page);
-  });
+  let data;
 
-  document.querySelectorAll(".nav-button").forEach(button => {
-    button.classList.remove("active");
-  });
+  try {
+    data = await response.json();
+  } catch {
+    throw new Error("The server returned an invalid response.");
+  }
 
-  const active = document.getElementById("nav-" + page);
-  if (active) active.classList.add("active");
+  if (!response.ok || data.success === false) {
+    if (response.status === 401 && sessionToken) {
+      saveSession("", null);
+      showAuth();
+    }
 
-  document.getElementById("pageTitle").textContent = {
-    employee: "My Attendance",
-    profile: "My Profile",
-    admin: "Employee Monitoring"
-  }[page];
+    throw new Error(data.error || "Request failed. Please try again.");
+  }
 
-  document.getElementById("pageDate").textContent =
-    new Date().toLocaleDateString(undefined, {
-      weekday: "long",
-      year: "numeric",
-      month: "long",
-      day: "numeric"
+  return data;
+}
+
+function setBusy(button, busy, busyText = "Please wait...") {
+  if (!button) return;
+
+  if (busy) {
+    button.dataset.originalText = button.textContent;
+    button.textContent = busyText;
+    button.disabled = true;
+  } else {
+    button.textContent = button.dataset.originalText || button.textContent;
+    button.disabled = false;
+  }
+}
+
+function showAuthTab(tab) {
+  document.getElementById("loginForm").classList.toggle("hidden", tab !== "login");
+  document.getElementById("registerForm").classList.toggle("hidden", tab !== "register");
+  document.getElementById("loginTab").classList.toggle("active", tab === "login");
+  document.getElementById("registerTab").classList.toggle("active", tab === "register");
+  hideMessage();
+}
+
+function showAuth() {
+  document.getElementById("authSection").classList.remove("hidden");
+  document.getElementById("employeeSection").classList.add("hidden");
+  document.getElementById("adminSection").classList.add("hidden");
+  document.getElementById("logoutBtn").classList.add("hidden");
+}
+
+function showEmployee() {
+  document.getElementById("authSection").classList.add("hidden");
+  document.getElementById("employeeSection").classList.remove("hidden");
+  document.getElementById("adminSection").classList.add("hidden");
+  document.getElementById("logoutBtn").classList.remove("hidden");
+}
+
+function showAdmin() {
+  document.getElementById("authSection").classList.add("hidden");
+  document.getElementById("employeeSection").classList.add("hidden");
+  document.getElementById("adminSection").classList.remove("hidden");
+  document.getElementById("logoutBtn").classList.remove("hidden");
+}
+
+document.getElementById("loginForm").addEventListener("submit", async event => {
+  event.preventDefault();
+
+  const button = document.getElementById("loginSubmit");
+  setBusy(button, true);
+
+  try {
+    const username = document.getElementById("loginUsername").value.trim();
+    const password = document.getElementById("loginPassword").value;
+
+    const data = await api("/api/login", {
+      method: "POST",
+      body: JSON.stringify({ username, password })
     });
 
-  renderApp();
+    if (!data.token) {
+      throw new Error("Login succeeded without a session token.");
+    }
+
+    const role = String(data.role || "employee").toLowerCase();
+
+    const user = role === "admin"
+      ? { role: "admin", username }
+      : {
+          role: "employee",
+          ...(data.employee || {}),
+          username: data.employee?.username || username
+        };
+
+    saveSession(data.token, user);
+    document.getElementById("loginPassword").value = "";
+
+    if (role === "admin") {
+      showAdmin();
+      await refreshAdmin();
+    } else {
+      showEmployee();
+      await loadEmployeeDashboard();
+    }
+
+    showMessage("Successfully signed in.", "success");
+  } catch (error) {
+    showMessage(error.message, "error");
+  } finally {
+    setBusy(button, false);
+  }
+});
+
+document.getElementById("registerForm").addEventListener("submit", async event => {
+  event.preventDefault();
+
+  const button = document.getElementById("registerSubmit");
+  setBusy(button, true);
+
+  try {
+    const payload = {
+      name: document.getElementById("regName").value.trim(),
+      phone: document.getElementById("regPhone").value.trim(),
+      employeeId: document.getElementById("regEmployeeId").value.trim(),
+      username: document.getElementById("regUsername").value.trim(),
+      password: document.getElementById("regPassword").value
+    };
+
+    if (payload.password.length < 10) {
+      throw new Error("Password must contain at least 10 characters.");
+    }
+
+    await api("/api/register", {
+      method: "POST",
+      body: JSON.stringify(payload)
+    });
+
+    document.getElementById("registerForm").reset();
+    document.getElementById("loginUsername").value = payload.username;
+    showAuthTab("login");
+
+    showMessage(
+      "Registration successful. Sign in using your new username and password.",
+      "success"
+    );
+  } catch (error) {
+    showMessage(error.message, "error");
+  } finally {
+    setBusy(button, false);
+  }
+});
+
+async function loadEmployeeDashboard() {
+  try {
+    const data = await api("/api/profile");
+    const employee = data.employee || currentUser || {};
+
+    currentUser = {
+      ...currentUser,
+      ...employee,
+      role: "employee"
+    };
+
+    localStorage.setItem(USER_KEY, JSON.stringify(currentUser));
+
+    document.getElementById("employeeWelcome").textContent =
+      "Welcome, " + (employee.name || employee.username || "Employee");
+
+    document.getElementById("profileName").textContent = employee.name || "-";
+    document.getElementById("profileEmployeeId").textContent =
+      employee.employeeId || employee.employee_id || "-";
+    document.getElementById("profileUsername").textContent = employee.username || "-";
+
+    document.getElementById("profileEditName").value = employee.name || "";
+    document.getElementById("profileEditPhone").value = employee.phone || "";
+
+    await loadMyVisits();
+  } catch (error) {
+    showMessage(error.message, "error");
+  }
 }
 
-function myVisits() {
-  return data.visits.filter(visit =>
-    visit.employeeRecordId === currentUser.id
-  );
+function isCheckedOut(visit) {
+  return Boolean(visit.check_out_time);
 }
 
-function openVisit() {
-  return myVisits().find(visit => !visit.checkOut) || null;
+function visitCoordinates(visit) {
+  const inLat = visit.check_in_lat;
+  const inLng = visit.check_in_lng;
+  const outLat = visit.check_out_lat;
+  const outLng = visit.check_out_lng;
+
+  const parts = [];
+
+  if (inLat != null && inLng != null) {
+    parts.push(
+      '<a target="_blank" rel="noopener" href="https://www.google.com/maps?q=' +
+      encodeURIComponent(inLat + "," + inLng) +
+      '" style="color:var(--cyan)">Check-in map</a>'
+    );
+  }
+
+  if (outLat != null && outLng != null) {
+    parts.push(
+      '<a target="_blank" rel="noopener" href="https://www.google.com/maps?q=' +
+      encodeURIComponent(outLat + "," + outLng) +
+      '" style="color:var(--green)">Check-out map</a>'
+    );
+  }
+
+  return parts.length ? parts.join("<br>") : "-";
 }
 
-function captureGPS() {
+function renderMyVisits() {
+  const body = document.getElementById("myVisitsBody");
+
+  if (!myVisits.length) {
+    body.innerHTML = '<tr><td colspan="6" class="empty">No visits found for this date.</td></tr>';
+    return;
+  }
+
+  body.innerHTML = myVisits.map(visit => {
+    const completed = isCheckedOut(visit);
+
+    return `
+      <tr>
+        <td>${escapeHtml(formatDate(visit.visit_date || visit.check_in_time))}</td>
+        <td>${escapeHtml(visit.company_name || "-")}</td>
+        <td>${escapeHtml(formatTime(visit.check_in_time))}</td>
+        <td>${escapeHtml(formatTime(visit.check_out_time))}</td>
+        <td><span class="badge ${completed ? "green" : "gold"}">
+          ${completed ? "Completed" : "Active"}
+        </span></td>
+        <td>${visitCoordinates(visit)}</td>
+      </tr>`;
+  }).join("");
+}
+
+async function loadMyVisits() {
+  try {
+    const date = document.getElementById("employeeVisitDate").value;
+    const query = date ? "?date=" + encodeURIComponent(date) : "";
+
+    const data = await api("/api/visits" + query);
+    myVisits = Array.isArray(data.visits) ? data.visits : [];
+
+    renderMyVisits();
+
+    const active = myVisits.find(visit => !isCheckedOut(visit));
+
+    activeVisit = active || null;
+
+    document.getElementById("statVisits").textContent = myVisits.length;
+    document.getElementById("statCompleted").textContent =
+      myVisits.filter(isCheckedOut).length;
+
+    document.getElementById("statActivity").textContent =
+      active ? "On Visit" : "Ready";
+
+    document.getElementById("statLocation").textContent =
+      active ? "Active" : "Available";
+
+    const badge = document.getElementById("employeeStatus");
+    badge.textContent = active ? "Visit In Progress" : "Not Checked In";
+    badge.className = "badge " + (active ? "green" : "gold");
+
+    document.getElementById("checkInBtn").classList.toggle("hidden", Boolean(active));
+    document.getElementById("checkOutBtn").classList.toggle("hidden", !active);
+
+  } catch (error) {
+    showMessage(error.message, "error");
+  }
+}
+
+document.getElementById("employeeVisitDate").value = localDate();
+document.getElementById("employeeVisitDate").addEventListener("change", loadMyVisits);
+
+function getGPS() {
   return new Promise((resolve, reject) => {
     if (!navigator.geolocation) {
-      reject(new Error("GPS is not supported by this browser."));
+      reject(new Error("This browser does not support GPS location."));
       return;
     }
 
     navigator.geolocation.getCurrentPosition(
       position => resolve({
         latitude: position.coords.latitude,
-        longitude: position.coords.longitude,
-        accuracy: position.coords.accuracy
+        longitude: position.coords.longitude
       }),
       error => {
         const messages = {
-          1: "Location permission denied. Allow location access.",
-          2: "Location unavailable. Please try again.",
-          3: "GPS timed out. Please try again."
+          1: "Location permission denied. Allow location access and try again.",
+          2: "GPS location is unavailable. Move to an area with better reception.",
+          3: "GPS request timed out. Please try again."
         };
 
-        reject(new Error(messages[error.code] || "Unable to capture GPS."));
+        reject(new Error(messages[error.code] || "Unable to get GPS location."));
       },
       {
         enableHighAccuracy: true,
-        maximumAge: 0,
-        timeout: 20000
+        timeout: 20000,
+        maximumAge: 0
       }
     );
   });
 }
 
-async function checkIn() {
-  const company = document.getElementById("companyName").value.trim();
-  const message = document.getElementById("attendanceMessage");
+document.getElementById("checkInForm").addEventListener("submit", async event => {
+  event.preventDefault();
 
-  if (!company) {
-    message.textContent = "Enter the company name first.";
+  const button = document.getElementById("checkInBtn");
+  const companyName = document.getElementById("companyName").value.trim();
+
+  if (!companyName) {
+    showMessage("Enter the customer or company name.", "error", "visitMessage");
     return;
   }
 
-  if (openVisit()) {
-    message.textContent = "Please check out from your current visit first.";
-    return;
-  }
-
-  message.textContent = "Capturing GPS location...";
+  setBusy(button, true, "Getting GPS...");
 
   try {
-    const gps = await captureGPS();
+    const coords = await getGPS();
 
-    data.visits.push({
-      id: id("visit"),
-      employeeRecordId: currentUser.id,
-      employeeId: currentUser.employeeId,
-      employeeName: currentUser.name,
-      company,
-      checkIn: new Date().toISOString(),
-      checkInGPS: gps,
-      checkOut: null,
-      checkOutGPS: null
+    setBusy(button, true, "Checking in...");
+
+    await api("/api/visits/check-in", {
+      method: "POST",
+      body: JSON.stringify({
+        companyName,
+        latitude: coords.latitude,
+        longitude: coords.longitude
+      })
     });
 
     document.getElementById("companyName").value = "";
 
-    message.textContent =
-      "Check-in captured. GPS accuracy: " +
-      Math.round(gps.accuracy) + " metres.";
+    showMessage("Check-in recorded successfully with GPS coordinates.", "success", "visitMessage");
+    await loadMyVisits();
 
-    saveData();
   } catch (error) {
-    message.textContent = error.message;
+    showMessage(error.message, "error", "visitMessage");
+  } finally {
+    setBusy(button, false);
+  }
+});
+
+async function checkOutVisit() {
+  const button = document.getElementById("checkOutBtn");
+  setBusy(button, true, "Getting GPS...");
+
+  try {
+    const coords = await getGPS();
+
+    setBusy(button, true, "Checking out...");
+
+    await api("/api/visits/check-out", {
+      method: "POST",
+      body: JSON.stringify({
+        latitude: coords.latitude,
+        longitude: coords.longitude
+      })
+    });
+
+    showMessage("Check-out recorded successfully.", "success", "visitMessage");
+    await loadMyVisits();
+
+  } catch (error) {
+    showMessage(error.message, "error", "visitMessage");
+  } finally {
+    setBusy(button, false);
   }
 }
 
-async function checkOut() {
-  const message = document.getElementById("attendanceMessage");
-  const visit = openVisit();
+document.getElementById("profileForm").addEventListener("submit", async event => {
+  event.preventDefault();
 
-  if (!visit) {
-    message.textContent = "No active visit found.";
+  const name = document.getElementById("profileEditName").value.trim();
+  const phone = document.getElementById("profileEditPhone").value.trim();
+
+  try {
+    await api("/api/profile", {
+      method: "PATCH",
+      body: JSON.stringify({ name, phone })
+    });
+
+    showMessage("Profile updated successfully.", "success");
+    await loadEmployeeDashboard();
+  } catch (error) {
+    showMessage(error.message, "error");
+  }
+});
+
+/* ADMIN */
+
+document.getElementById("adminVisitDate").value = localDate();
+
+document.getElementById("adminVisitDate").addEventListener("change", loadAdminVisits);
+document.getElementById("adminVisitSearch").addEventListener("input", renderAdminVisits);
+document.getElementById("employeeSearch").addEventListener("input", renderAdminEmployees);
+
+async function refreshAdmin() {
+  showAdmin();
+
+  try {
+    await Promise.all([
+      loadAdminEmployees(),
+      loadAdminVisits()
+    ]);
+  } catch (error) {
+    showMessage(error.message, "error");
+  }
+}
+
+async function loadAdminEmployees() {
+  const data = await api("/api/admin/employees");
+  adminEmployees = Array.isArray(data.employees) ? data.employees : [];
+
+  document.getElementById("adminEmployeeCount").textContent = adminEmployees.length;
+  renderAdminEmployees();
+}
+
+function renderAdminEmployees() {
+  const body = document.getElementById("adminEmployeesBody");
+  const query = document.getElementById("employeeSearch").value.trim().toLowerCase();
+
+  const filtered = adminEmployees.filter(employee => {
+    const text = [
+      employee.name,
+      employee.employee_id,
+      employee.username,
+      employee.phone,
+      employee.current_company
+    ].join(" ").toLowerCase();
+
+    return text.includes(query);
+  });
+
+  if (!filtered.length) {
+    body.innerHTML = '<tr><td colspan="7" class="empty">No employee accounts found.</td></tr>';
     return;
   }
 
-  message.textContent = "Capturing check-out location...";
+  body.innerHTML = filtered.map(employee => `
+    <tr>
+      <td>${escapeHtml(employee.name || "-")}</td>
+      <td>${escapeHtml(employee.employee_id || "-")}</td>
+      <td>${escapeHtml(employee.username || "-")}</td>
+      <td>${escapeHtml(employee.phone || "-")}</td>
+      <td>${escapeHtml(employee.current_company || "-")}</td>
+      <td>${escapeHtml(formatTime(employee.current_check_in))}</td>
+      <td>
+        <div class="button-row">
+          <button class="btn-secondary btn-small"
+            onclick="editEmployee(${Number(employee.id)})">Edit</button>
+          <button class="btn-danger btn-small"
+            onclick="deleteEmployee(${Number(employee.id)})">Delete</button>
+        </div>
+      </td>
+    </tr>
+  `).join("");
+}
+
+async function editEmployee(id) {
+  const employee = adminEmployees.find(item => Number(item.id) === Number(id));
+  if (!employee) return;
+
+  const name = prompt("Employee name:", employee.name || "");
+  if (name === null) return;
+
+  const phone = prompt("Employee phone:", employee.phone || "");
+  if (phone === null) return;
+
+  if (!name.trim() || !phone.trim()) {
+    showMessage("Name and phone cannot be empty.", "error");
+    return;
+  }
 
   try {
-    const gps = await captureGPS();
+    await api("/api/admin/employees/" + encodeURIComponent(id), {
+      method: "PATCH",
+      body: JSON.stringify({
+        name: name.trim(),
+        phone: phone.trim()
+      })
+    });
 
-    visit.checkOut = new Date().toISOString();
-    visit.checkOutGPS = gps;
-
-    message.textContent = "Check-out completed successfully.";
-
-    saveData();
+    showMessage("Employee details updated.", "success");
+    await loadAdminEmployees();
   } catch (error) {
-    message.textContent = error.message;
+    showMessage(error.message, "error");
   }
 }
 
-function renderApp() {
-  if (!currentUser) return;
-
-  if (currentUser.role === "admin") {
-    renderAdmin();
-  } else {
-    renderEmployee();
-    renderProfile();
-  }
-}
-
-function renderEmployee() {
-  const visits = myVisits();
-  const today = visits.filter(visit =>
-    localDay(new Date(visit.checkIn)) === localDay()
-  );
-
-  const active = openVisit();
-
-  document.getElementById("myVisits").textContent = today.length;
-
-  document.getElementById("myStatus").innerHTML = active
-    ? '<span class="status">Present · ' +
-      escapeHTML(active.company) + '</span>'
-    : '<span class="status off">Not checked in</span>';
-
-  document.getElementById("myGPSStatus").textContent =
-    active && active.checkInGPS
-      ? "Location captured"
-      : "Waiting for check-in";
-
-  document.getElementById("checkInButton")
-    .classList.toggle("hidden", Boolean(active));
-
-  document.getElementById("checkOutButton")
-    .classList.toggle("hidden", !active);
-
-  const history = [...today].reverse();
-
-  document.getElementById("myHistory").innerHTML =
-    history.length ? `
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Company</th>
-              <th>Check-in</th>
-              <th>Check-out</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${history.map(visit => `
-              <tr>
-                <td>${escapeHTML(visit.company)}</td>
-                <td>${escapeHTML(displayTime(visit.checkIn))}</td>
-                <td>${escapeHTML(displayTime(visit.checkOut))}</td>
-                <td>
-                  <span class="status ${visit.checkOut ? "off" : ""}">
-                    ${visit.checkOut ? "Completed" : "Present"}
-                  </span>
-                </td>
-              </tr>
-            `).join("")}
-          </tbody>
-        </table>
-      </div>
-    ` : '<p class="muted">No visits recorded today.</p>';
-}
-
-function renderProfile() {
-  document.getElementById("profileName").value = currentUser.name;
-  document.getElementById("profilePhone").value = currentUser.phone;
-  document.getElementById("profileId").value = currentUser.employeeId;
-  document.getElementById("profileUsername").value = currentUser.username;
-}
-
-document.getElementById("profileForm").addEventListener("submit", event => {
-  event.preventDefault();
-
-  const employee = data.employees.find(item => item.id === currentUser.id);
+async function deleteEmployee(id) {
+  const employee = adminEmployees.find(item => Number(item.id) === Number(id));
   if (!employee) return;
 
-  employee.name = document.getElementById("profileName").value.trim();
-  employee.phone = document.getElementById("profilePhone").value.trim();
+  const confirmed = confirm(
+    "Permanently delete employee " + (employee.name || employee.username) + "?"
+  );
 
-  currentUser.name = employee.name;
-  currentUser.phone = employee.phone;
+  if (!confirmed) return;
 
-  document.getElementById("headerUser").textContent =
-    currentUser.name + " · Employee";
+  try {
+    await api("/api/admin/employees/" + encodeURIComponent(id), {
+      method: "DELETE"
+    });
 
-  data.visits.forEach(visit => {
-    if (visit.employeeRecordId === currentUser.id) {
-      visit.employeeName = currentUser.name;
-    }
+    showMessage("Employee account deleted.", "success");
+    await refreshAdmin();
+  } catch (error) {
+    showMessage(error.message, "error");
+  }
+}
+
+async function loadAdminVisits() {
+  const date = document.getElementById("adminVisitDate").value;
+  const query = date ? "?date=" + encodeURIComponent(date) : "";
+
+  const data = await api("/api/admin/visits" + query);
+  adminVisits = Array.isArray(data.visits) ? data.visits : [];
+
+  document.getElementById("adminVisitCount").textContent = adminVisits.length;
+  document.getElementById("adminActiveCount").textContent =
+    adminVisits.filter(visit => !isCheckedOut(visit)).length;
+  document.getElementById("adminCompletedCount").textContent =
+    adminVisits.filter(isCheckedOut).length;
+
+  renderAdminVisits();
+}
+
+function renderAdminVisits() {
+  const body = document.getElementById("adminVisitsBody");
+  const query = document.getElementById("adminVisitSearch").value.trim().toLowerCase();
+
+  const filtered = adminVisits.filter(visit => {
+    const text = [
+      visit.employee_name,
+      visit.employee_code,
+      visit.company_name,
+      visit.visit_date
+    ].join(" ").toLowerCase();
+
+    return text.includes(query);
   });
 
-  document.getElementById("profileMessage").textContent =
-    "Profile updated in this browser demo.";
+  if (!filtered.length) {
+    body.innerHTML = '<tr><td colspan="8" class="empty">No visit records found.</td></tr>';
+    return;
+  }
 
-  saveData();
-});
+  body.innerHTML = filtered.map(visit => {
+    const completed = isCheckedOut(visit);
 
-function renderAdmin() {
-  if (!currentUser || currentUser.role !== "admin") return;
-
-  const today = data.visits.filter(visit =>
-    localDay(new Date(visit.checkIn)) === localDay()
-  );
-
-  const active = data.visits.filter(visit => !visit.checkOut);
-
-  document.getElementById("adminTotal").textContent =
-    data.employees.filter(employee => employee.active).length;
-
-  document.getElementById("adminPresent").textContent = active.length;
-  document.getElementById("adminVisits").textContent = today.length;
-
-  const query = (
-    document.getElementById("adminSearch").value || ""
-  ).toLowerCase();
-
-  const visits = [...data.visits]
-    .filter(visit =>
-      [
-        visit.employeeName,
-        visit.employeeId,
-        visit.company
-      ].join(" ").toLowerCase().includes(query)
-    )
-    .reverse();
-
-  document.getElementById("adminTable").innerHTML =
-    visits.length ? visits.map(visit => `
+    return `
       <tr>
-        <td>
-          ${escapeHTML(visit.employeeName)}
-          <br>
-          <span class="muted">${escapeHTML(visit.employeeId)}</span>
-        </td>
-
-        <td>${escapeHTML(visit.company)}</td>
-        <td>${escapeHTML(displayTime(visit.checkIn))}</td>
-        <td>${escapeHTML(displayTime(visit.checkOut))}</td>
-
-        <td>
-          ${visit.checkOutGPS
-            ? `<a target="_blank" rel="noopener"
-                href="https://www.google.com/maps?q=${visit.checkOutGPS.latitude},${visit.checkOutGPS.longitude}">
-                Check-out map
-              </a>`
-            : visit.checkInGPS
-              ? `<a target="_blank" rel="noopener"
-                  href="https://www.google.com/maps?q=${visit.checkInGPS.latitude},${visit.checkInGPS.longitude}">
-                  Check-in map
-                </a>`
-              : "—"}
-        </td>
-
-        <td>
-          <span class="status ${visit.checkOut ? "off" : ""}">
-            ${visit.checkOut ? "Completed" : "Present"}
-          </span>
-        </td>
-      </tr>
-    `).join("") :
-    '<tr><td colspan="6">No visits found.</td></tr>';
-
-  document.getElementById("adminEmployees").innerHTML =
-    data.employees.length ? data.employees.map(employee => `
-      <tr>
-        <td>${escapeHTML(employee.employeeId)}</td>
-        <td>${escapeHTML(employee.name)}</td>
-        <td>${escapeHTML(employee.phone)}</td>
-        <td>${escapeHTML(employee.username)}</td>
-        <td>
-          <button class="danger"
-            onclick="deleteEmployee('${employee.id}')">
-            Delete
-          </button>
-        </td>
-      </tr>
-    `).join("") :
-    '<tr><td colspan="5">No registered employees.</td></tr>';
+        <td>${escapeHtml(visit.employee_name || "-")}</td>
+        <td>${escapeHtml(visit.employee_code || "-")}</td>
+        <td>${escapeHtml(visit.company_name || "-")}</td>
+        <td>${escapeHtml(formatDate(visit.visit_date || visit.check_in_time))}</td>
+        <td>${escapeHtml(formatTime(visit.check_in_time))}</td>
+        <td>${escapeHtml(formatTime(visit.check_out_time))}</td>
+        <td><span class="badge ${completed ? "green" : "gold"}">
+          ${completed ? "Completed" : "Active"}
+        </span></td>
+        <td>${visitCoordinates(visit)}</td>
+      </tr>`;
+  }).join("");
 }
 
-function deleteEmployee(employeeRecordId) {
-  const employee = data.employees.find(item =>
-    item.id === employeeRecordId
-  );
-
-  if (!employee) return;
-
-  if (!confirm(
-    "Permanently delete this employee and all their attendance records?"
-  )) return;
-
-  data.employees = data.employees.filter(item =>
-    item.id !== employeeRecordId
-  );
-
-  data.visits = data.visits.filter(visit =>
-    visit.employeeRecordId !== employeeRecordId
-  );
-
-  saveData();
+function csvCell(value) {
+  return '"' + String(value ?? "").replace(/"/g, '""') + '"';
 }
+
+function downloadCSV(filename, rows) {
+  const csv = rows.map(row => row.map(csvCell).join(",")).join("\r\n");
+  const blob = new Blob(["\uFEFF" + csv], { type: "text/csv;charset=utf-8;" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+
+  link.href = url;
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+function exportAdminVisits() {
+  const rows = [
+    [
+      "Employee",
+      "Employee ID",
+      "Company",
+      "Date",
+      "Check In",
+      "Check Out",
+      "Check In Latitude",
+      "Check In Longitude",
+      "Check Out Latitude",
+      "Check Out Longitude"
+    ],
+    ...adminVisits.map(visit => [
+      visit.employee_name,
+      visit.employee_code,
+      visit.company_name,
+      visit.visit_date,
+      visit.check_in_time,
+      visit.check_out_time,
+      visit.check_in_lat,
+      visit.check_in_lng,
+      visit.check_out_lat,
+      visit.check_out_lng
+    ])
+  ];
+
+  downloadCSV("lubri-fieldtrack-visits.csv", rows);
+}
+
+/* SIGN OUT */
+
+async function logout() {
+  try {
+    if (sessionToken) {
+      await api("/api/logout", { method: "POST", body: "{}" });
+    }
+  } catch (error) {
+    console.warn("Logout request failed:", error.message);
+  }
+
+  saveSession("", null);
+  myVisits = [];
+  adminVisits = [];
+  adminEmployees = [];
+  activeVisit = null;
+
+  showAuth();
+  showAuthTab("login");
+  showMessage("You have signed out.", "success");
+}
+
+/* RESTORE EXISTING SESSION */
+
+async function restoreSession() {
+  if (!sessionToken || !currentUser) {
+    showAuth();
+    return;
+  }
+
+  try {
+    if (String(currentUser.role).toLowerCase() === "admin") {
+      showAdmin();
+      await refreshAdmin();
+    } else {
+      showEmployee();
+      await loadEmployeeDashboard();
+    }
+  } catch (error) {
+    console.warn("Session restore failed:", error.message);
+    saveSession("", null);
+    showAuth();
+    showMessage("Please sign in again. " + error.message, "error");
+  }
+}
+
+/* CHECK API AVAILABILITY */
+
+async function checkServer() {
+  const indicator = document.querySelector(".status-dot");
+  const label = document.querySelector(".status-pill");
+
+  try {
+    const response = await fetch(API_BASE + "/api/health");
+    const data = await response.json();
+
+    if (!response.ok || data.success !== true) {
+      throw new Error("Health check failed");
+    }
+
+    indicator.style.background = "var(--green)";
+    label.lastChild.textContent = " API Online";
+  } catch {
+    indicator.style.background = "var(--danger)";
+    label.lastChild.textContent = " API Unavailable";
+  }
+}
+
+checkServer();
+restoreSession();
 </script>
 
 </body>
-        </html>
+                              </html>
