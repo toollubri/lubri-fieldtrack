@@ -1,0 +1,14 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "lubri-fieldtrack",
+  "main": "src/index.js",
+  "compatibility_date": "2026-10-26",
+
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "lubri-fieldtrack-db",
+      "database_id": "PASTE_YOUR_D1_DATABASE_ID_HERE"
+    }
+  ]
+}
