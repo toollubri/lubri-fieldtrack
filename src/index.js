@@ -46,7 +46,7 @@ async function hashPassword(password, saltHex) {
     {
       name: "PBKDF2",
       salt,
-      iterations: 210000,
+      iterations: 100000,
       hash: "SHA-256"
     },
     key,
