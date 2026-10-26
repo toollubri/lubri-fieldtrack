@@ -3,11 +3,16 @@
   "name": "lubri-fieldtrack",
   "main": "src/index.js",
   "compatibility_date": "2026-10-26",
+
   "d1_databases": [
     {
       "binding": "DB",
       "database_name": "lubri-fieldtrack-db",
       "database_id": "e55898ee-f4bf-48fa-b2a7-d9199bd19450"
     }
-  ]
+  ],
+
+  "vars": {
+    "ADMIN_USERNAME": "admin"
+  }
 }
